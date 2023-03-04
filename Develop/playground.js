@@ -18,7 +18,7 @@ const questions = [
     {
         type: 'input',
         name: 'installs',
-        message: 'List any installation instructions here.',
+        message: 'Write the installation commands for the terminal prompt here.',
         validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
     },
     {
@@ -36,7 +36,7 @@ const questions = [
     {
         type: 'input',
         name: 'tests',
-        message: 'Write here how to test the project.',
+        message: 'Write the terminal prompt to test the project.',
         validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
     },
     {
@@ -118,7 +118,7 @@ function init() {
     inquirer
     .prompt(questions)
     .then((answers) => {
-        console.log(answers, "answers"),
+//        console.log(answers, "answers"),
         writeToFile(fileName, answers)
     })
     // TODO: Create a function to write README file

@@ -1,18 +1,36 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+function renderLicenseBadge(license) {
+  if (license !== 'None') {
+    return `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`;
+  }
+  return '';
+}
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+function renderLicenseLink(license) {
+  if (license !== 'None') {
+    return `\n- [License](#license)`;
+  }
+  return '';
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseSection(license) {
+  if (license !== 'None') {
+    return `## License
+
+This project is licensed under the ${license} license.`;
+  }
+  return '';
+}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
 return `# ${data.title}
+${renderLicenseBadge(data.license)}
 
 ## Description
 
@@ -21,23 +39,24 @@ ${data.description}
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
+- [Usage](#usage)${renderLicenseLink(data.license)}
 - [contributing](#contributing)
 - [tests](#tests)
 - [questions](#questions)
 
 ## Installation
 
+To install necessary dependencies, type the following commands in the terminal:
+
+\`\`\`
 ${data.installs}
+\`\`\`
 
 ## Usage
 
 ${data.usage}
 
-## License
-
-${data.license}
+${renderLicenseSection(data.license)}
 
 ## Contributing
 
@@ -45,7 +64,11 @@ ${data.contributions}
 
 ## Tests
 
+To do tests, write the following command in the terminal file:
+
+\`\`\`
 ${data.tests}
+\`\`\`
 
 # Questions
 
