@@ -1,111 +1,113 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 const questions = [
     {
         type: 'input',
-        name: 'userName',
-        message: `What is your Github username?`,
-        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
-    },
-    {
-        type: 'input',
-        name: 'description',
-        message: '?',
-        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
-    },
-/*     {
-        type: 'input',
-        name: 'installs',
-        message: '?',
-        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
-    },
-    {
-        type: 'input',
-        name: `projectTitle?`,
+        name: 'title',
         message: `What is your project's title?`,
         validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
     },
     {
         type: 'input',
-        name: '',
-        message: '?',
+        name: 'description',
+        message: 'Write the description of the project here.',
         validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
-    }, */
+    },
+    {
+        type: 'input',
+        name: 'installs',
+        message: 'List any installation instructions here.',
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    },
+    {
+        type: 'input',
+        name: `usage`,
+        message: `List usage information here.`,
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    },
+    {
+        type: 'input',
+        name: 'contributions',
+        message: 'Any way to for others to contribute to the project?',
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    }, 
+    {
+        type: 'input',
+        name: 'tests',
+        message: 'Write here how to test the project.',
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    },
+    {
+        type: 'list',
+        name: 'license',
+        message: `Pick which license you're using`,
+        choices: ['MIT', 'APACHE', 'GPLv2', 'None'],
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    },
+    {
+        type: 'input',
+        name: `gitUser`,
+        message: `What is your Github username?`,
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What email is the best way to contact you for the project?',
+        validate: (value) => { if (value) { return true } else { return `Please fill out.` } },
+    }, 
 ]
 
-function generateReadMe(questions) {
-return `# <Your-Project-Title>
+function generateReadMe(data) {
+return `# ${data.title}
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+${data.description}
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Credits](#credits)
 - [License](#license)
+- [contributing](#contributing)
+- [tests](#tests)
+- [questions](#questions)
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+${data.installs}
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    "![alt text](assets/images/screenshot.png)"
-
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+${data.usage}
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+${data.license}
 
----
+## Contributing
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+${data.contributions}
 
 ## Tests
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.`;
+${data.tests}
+
+# Questions
+
+Got questions about the repo? Feel free to add an issue on my Github page and check out my other works here: 
+[${data.gitUser}](https://github.com/${data.gitUser}/) 
+or you can contact me at ${data.email}
+`;
 }
 
 function writeToFile(fileName, answers) {
     //fs.writeToFile(README.md, generateReadMe(questions), (err) =>
-    let data = generateReadMe(answers)
-    fs.writeFile(fileName, data, (err) =>
+    let inputs = generateReadMe(answers)
+    fs.writeFile(fileName, inputs, (err) =>
     err ? console.log(err) : console.log('Success!'),
     );
 }
