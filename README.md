@@ -2,7 +2,8 @@
 
 ## Description
 
-This package is meant to help make a readme file by taking user input and then generating it appropriately
+This package is meant to help make a readme file by taking user input and then generating it appropriately.
+Link to demonstration found [here](https://watch.screencastify.com/v/0MkyBbsNVaP5d2VGqqGM)
 
 ## Table of Contents
 
