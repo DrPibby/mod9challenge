@@ -40,9 +40,9 @@ ${data.description}
 
 - [Installation](#installation)
 - [Usage](#usage)${renderLicenseLink(data.license)}
-- [contributing](#contributing)
-- [tests](#tests)
-- [questions](#questions)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
 ## Installation
 
@@ -72,8 +72,8 @@ ${data.tests}
 
 # Questions
 
-Got questions about the repo? Feel free to add an issue on my Github page and check out my other works here: 
-[${data.gitUser}](https://github.com/${data.gitUser}/) 
+Got questions about the repo? Feel free to add an issue on my Github page and check out my other works here, 
+[${data.gitUser}](https://github.com/${data.gitUser}/), 
 or you can contact me at ${data.email}
 `;
 }
